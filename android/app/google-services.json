@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1081903409479",
+    "project_id": "crimelogger",
+    "storage_bucket": "crimelogger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081903409479:android:496639b6ab50c650fa4462",
+        "android_client_info": {
+          "package_name": "com.example.crimelogger.crimelogger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081903409479-iafduoe6kh81m1boj4k5pjeebdocv7k3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqrDF22D-a22q53eXOQZ5RW67p5pmqmxI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081903409479-iafduoe6kh81m1boj4k5pjeebdocv7k3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
