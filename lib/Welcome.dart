@@ -1,6 +1,6 @@
-import 'package:crimelogger/FetchData.dart';
-import 'package:crimelogger/MapScreen.dart';
-import 'package:crimelogger/Reported.dart';
+import 'package:crimelogger/EXTRA/FetchData.dart';
+import 'package:crimelogger/Testing.dart';
+import 'package:crimelogger/ReportedCrimes.dart';
 import 'package:crimelogger/User.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';

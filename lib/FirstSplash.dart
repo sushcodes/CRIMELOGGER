@@ -1,7 +1,7 @@
 import 'package:crimelogger/User.dart';
 import 'CustomIcon.dart';
 import 'package:flutter/material.dart';
-import 'MapScreen.dart';
+import 'Testing.dart';
 class FirstSplash extends StatelessWidget {
   static const String id = 'FirstSplash';
   @override
@@ -22,16 +22,6 @@ class FirstSplash extends StatelessWidget {
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> UserScreen()));
               //Navigator.push(context, MaterialPageRoute(builder: (context)=> UserScreen()));
             },)),
-    );
-  }
-}
-class CONT extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: MapScreen(),
-      height: MediaQuery.of(context).size.height * 0.9,
-      width: MediaQuery.of(context).size.width * 1,
     );
   }
 }

@@ -1,6 +1,6 @@
 
-import 'package:crimelogger/FetchData.dart';
-import 'package:crimelogger/MapScreen.dart';
+import 'package:crimelogger/EXTRA/FetchData.dart';
+import 'package:crimelogger/Testing.dart';
 import 'package:crimelogger/Welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';

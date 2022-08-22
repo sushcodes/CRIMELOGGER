@@ -1,8 +1,8 @@
-import 'package:crimelogger/FetchData.dart';
-import 'package:crimelogger/Reported.dart';
+import 'package:crimelogger/EXTRA/FetchData.dart';
+import 'package:crimelogger/ReportedCrimes.dart';
 import 'package:crimelogger/Welcome.dart';
 import 'package:flutter/material.dart';
-import 'MapScreen.dart';
+import 'Testing.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'FirstSplash.dart';
 import 'package:crimelogger/User.dart';
@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
         initialRoute: FirstSplash.id,
         routes: {
           FirstSplash.id: (context) => FirstSplash(),
-          MapScreen.id: (context) => MapScreen(),
           Testing.id: (context) => Testing(),
           WelcomeScreen.id : (context) => WelcomeScreen(),
           UserScreen.id : (context) => UserScreen(),

@@ -2,11 +2,11 @@ import 'dart:math';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:location/location.dart';
-import 'package:crimelogger/FetchData.dart';
+import 'package:crimelogger/EXTRA/FetchData.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:geolocator/geolocator.dart';
-
+import 'package:geolocator/geolocator.dart' as G;
+import 'package:location/location.dart';
 class MapPoint extends StatefulWidget {
   LatLng l = LatLng(10, 10);
   String desc = "GOOD";
@@ -69,37 +69,61 @@ class _MapPointState extends State<MapPoint> {
     });
   }
 
+
   Future<int> getCurrentLocation(int x) async {
-    Location location = Location();
-
-    // Check if location service is enable
-    bool _serviceEnabled = await location.serviceEnabled();
+    G.LocationPermission permission;
+    bool _serviceEnabled = await Location().serviceEnabled();
     if (!_serviceEnabled) {
-      bool _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return 1;
+      bool _serviceEnabled = await Location().requestService();
+    }
+    permission = await G.Geolocator.checkPermission();
+    if (permission == G.LocationPermission.denied) {
+      permission = await G.Geolocator.requestPermission();
+      if (permission == G.LocationPermission.denied) {
+        permission = await G.Geolocator.requestPermission();
       }
     }
 
-    // Check if permission is granted
-    PermissionStatus _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return 1;
+    if (permission == G.LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      permission = await G.Geolocator.requestPermission();
+    }
+    setState(() {
+      cl = Colors.purple;
+    });
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    G.Position? p=null;
+    try {
+      p = await G.Geolocator.getCurrentPosition(
+          desiredAccuracy: G.LocationAccuracy.high,
+          timeLimit: Duration(seconds: 7));
+      setState(() {
+        cl = Colors.black;
+      });
+    }
+    catch(e) {
+      try {
+        p = await G.Geolocator.getCurrentPosition(
+            desiredAccuracy: G.LocationAccuracy.high,
+            forceAndroidLocationManager: true,
+            timeLimit: Duration(seconds: 5));
+      }
+      catch (e) {
+        print(e);
       }
     }
 
-    final _locationData = await location.getLocation();
-      if (_locationData != null) {
-        lon = _locationData!.longitude!;
-        lat = _locationData!.latitude!;
-      }
+    if (p != null) {
+      lat = p.latitude;
+      lon = p.longitude;
+      return 2;
+    }
+    print("LEAVING GETCURRENTLOCATION");
     return 1;
   }
 
   void RefreshMap() async {
-
     await getCurrentLocation(1);
     UpdateUI();
     mapController!.moveCamera(CameraUpdate.newLatLng(LatLng(lat, lon)));
